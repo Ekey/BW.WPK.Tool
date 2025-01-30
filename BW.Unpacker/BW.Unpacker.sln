@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.35425.106
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BW.Unpacker", "BW.Unpacker\BW.Unpacker.csproj", "{77970952-26E1-4214-B31C-5AAA492512CF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{77970952-26E1-4214-B31C-5AAA492512CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77970952-26E1-4214-B31C-5AAA492512CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77970952-26E1-4214-B31C-5AAA492512CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77970952-26E1-4214-B31C-5AAA492512CF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A793B82D-C6F7-4B9C-83AF-C6C80664FC90}
+	EndGlobalSection
+EndGlobal
