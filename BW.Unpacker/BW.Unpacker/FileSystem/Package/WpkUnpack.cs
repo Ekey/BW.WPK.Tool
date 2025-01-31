@@ -25,14 +25,22 @@ namespace BW.Unpacker
                 lpBuffer = ZLIB.iDecompress(lpBuffer, 2);
 
             lpBuffer = XOR.iReverseData(lpBuffer);
-			
+
+            return lpBuffer;
+        }
+
+        private static Byte[] iFixPythonHeader(Byte[] lpBuffer)
+        {
             //Python 2.7.x header
             Byte[] lpResult = { 0x03, 0xF3, 0x0D, 0x0A, 0x00, 0x00, 0x00, 0x00 };
+
+            //128 + 4 bytes signature????
+            Array.Resize(ref lpBuffer, lpBuffer.Length - 132);
 
             Array.Resize(ref lpResult, lpResult.Length + lpBuffer.Length);
             Array.Copy(lpBuffer, 0, lpResult, 8, lpBuffer.Length);
 
-            return lpBuffer;
+            return lpResult;
         }
 
         public static void iDoIt(String m_IdxFile, String m_DstFolder)
@@ -150,10 +158,15 @@ namespace BW.Unpacker
 
                             if (Path.GetFileNameWithoutExtension(m_IdxFile) == "script")
                             {
-                                //Resource list (Android - not encrypted) (iOS - ??)
-                                if (m_FileName != "b7839921abbc655e02e61967455dae28")
+                                switch (m_FileName)
                                 {
-                                    lpBuffer = iDecryptPythonData(lpBuffer);
+                                    // Resource list (Android) - Not encrypted
+                                    case "b7839921abbc655e02e61967455dae28": break;
+                                    // Resource list (iOS) - Not encrypted
+                                    case "804d77ebb7b3e616a2e6fd91ad08fff3": break;
+                                    // redirect script (iOS) - Not encrypted
+                                    case "050d1d2e47128ad7046c8e0ff66b7ed7": lpBuffer = iFixPythonHeader(lpBuffer); break;
+                                    default: lpBuffer = iDecryptPythonData(lpBuffer); lpBuffer = iFixPythonHeader(lpBuffer); break;
                                 }
                             }
                         }

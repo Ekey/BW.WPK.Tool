@@ -38,9 +38,6 @@ namespace BW.Unpacker
                 lpBuffer[j] = bTemp1;
             }
 
-            //128 + 4 bytes signature????
-            Array.Resize(ref lpBuffer, lpBuffer.Length - 132);
-
             return lpBuffer;
         }
     }
