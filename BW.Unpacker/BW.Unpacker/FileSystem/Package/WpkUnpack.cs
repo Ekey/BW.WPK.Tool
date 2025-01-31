@@ -25,6 +25,12 @@ namespace BW.Unpacker
                 lpBuffer = ZLIB.iDecompress(lpBuffer, 2);
 
             lpBuffer = XOR.iReverseData(lpBuffer);
+			
+            //Python 2.7.x header
+            Byte[] lpResult = { 0x03, 0xF3, 0x0D, 0x0A, 0x00, 0x00, 0x00, 0x00 };
+
+            Array.Resize(ref lpResult, lpResult.Length + lpBuffer.Length);
+            Array.Copy(lpBuffer, 0, lpResult, 8, lpBuffer.Length);
 
             return lpBuffer;
         }
@@ -144,7 +150,11 @@ namespace BW.Unpacker
 
                             if (Path.GetFileNameWithoutExtension(m_IdxFile) == "script")
                             {
-                                lpBuffer = iDecryptPythonData(lpBuffer);
+                                //Resource list (Android - not encrypted) (iOS - ??)
+                                if (m_FileName != "b7839921abbc655e02e61967455dae28")
+                                {
+                                    lpBuffer = iDecryptPythonData(lpBuffer);
+                                }
                             }
                         }
 
