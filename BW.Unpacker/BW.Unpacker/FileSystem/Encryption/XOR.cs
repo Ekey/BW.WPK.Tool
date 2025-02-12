@@ -27,18 +27,21 @@ namespace BW.Unpacker
         //For python scripts only
         public static Byte[] iReverseData(Byte[] lpBuffer)
         {
-            Int32 j = lpBuffer.Length - 1;
+            List<Byte> lpTemp = new List<Byte>();
 
-            for (Int32 i = 0; i < lpBuffer.Length / 2; i++, j--)
+            for (Int32 i = 0; i < 128; i++)
             {
-                Byte bTemp1 = lpBuffer[i];
-                Byte bTemp2 = lpBuffer[j];
-
-                lpBuffer[i] = bTemp2;
-                lpBuffer[j] = bTemp1;
+                lpBuffer[i] ^= 0x9A;
             }
 
-            return lpBuffer;
+            foreach (Byte bByte in lpBuffer)
+            {
+                lpTemp.Add(bByte);
+            }
+
+            lpTemp.Reverse();
+
+            return lpTemp.ToArray();
         }
     }
 }
